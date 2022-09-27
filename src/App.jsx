@@ -1,15 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
 import CookieConsent, { getCookieConsentValue } from 'react-cookie-consent';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { setCookie } from './hooks';
+import { PrimaryButton } from './components';
+import Cookie from 'js-cookie';
 
 function App() {
   const checkCookie = () =>
     getCookieConsentValue('allow') === 'true' ? true : false; // false
   // checkCookie = false
   const [allow, setAllow] = useState(checkCookie());
-
   const allowHandler = () => setAllow(checkCookie());
+
+  const userName = 'mamadou';
+  const password = '123456';
 
   return (
     <div className="App">
@@ -30,6 +35,7 @@ function App() {
             ? 'I can use your cookie 🍪'
             : "Damn ! I can't use your cookie 🥹"}{' '}
         </h1>
+        <PrimaryButton />
       </header>
       <CookieConsent
         cookieSecurity={true}
