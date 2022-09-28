@@ -1,4 +1,4 @@
-import { Add } from './components';
+import { Add, FetchData } from './components';
 import './App.css';
 import { useEffect, useState } from 'react';
 
@@ -20,7 +20,7 @@ function App() {
 
       // name
       // {keyPath: 'email'} || {autoIncrement: true or false}
-      /* db.createObjectStore('josei', { autoIncrement: true });
+      /* db.createObjectStore('josei', { keyPath: name });
         db.createObjectStore('kodomo', { autoIncrement: true });
         db.createObjectStore('shonen', { autoIncrement: true });
         db.createObjectStore('shojo', { autoIncrement: true });
@@ -46,6 +46,11 @@ function App() {
     <div className="App">
       {/* <Add  onChangeHandler={onChangeHandler} dbRequest={dbRequest} /> 👇 */}
       <Add {...{ onChangeHandler, dbRequest }} />
+
+      <hr />
+      
+      {/* Fetch Data */}
+      <FetchData {...{ onChangeHandler, dbRequest }} />
     </div>
   );
 }

@@ -1,4 +1,6 @@
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -12,6 +14,9 @@
   color: #fff;
 }
 
+hr {
+  margin-block: 2rem;
+}
 
 form {
   margin-top: 1.5rem;
@@ -19,11 +24,15 @@ form {
   gap: 1.5rem;
 }
 
-form div{
+form div {
   display: grid;
   gap: 1rem;
 }
 
 form input {
   padding: 0.4rem 0.7rem;
+}
+
+input[type='submit'] {
+  background-color: #ffbd59;
 }
