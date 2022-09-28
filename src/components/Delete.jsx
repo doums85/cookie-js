@@ -22,20 +22,39 @@ export default function Delete({ onChangeHandler, dbRequest }) {
     }
   }
 
+  function deleteCollectionHandler() {
+    // 1) Create a new transaction
+    const transaction = dbRequest.transaction('shonen', 'readwrite');
+    // 2) handling Object store
+    const store = transaction.objectStore('shonen');
 
+    // 3) delete All objects
+    const request = store.clear();
 
-function deleteCollectionHandler() {
-  const dbName = 'manga';
-  const dbVersion = 5;
-  const dbRequest = indexedDB.open(dbName, dbVersion);
+    request.onsuccess = function (event) {
+      alert('All objects deleted successfully');
+    };
 
-  dbRequest.onupgradeneeded = function (event) {
-    const db = event.target.result;
-
-    console.log(db);
+    request.onerror = function (event) {
+      alert('error deleting');
+    };
   }
-}
 
+  const deleteDatabaseHandler = function () {
+    const dbName = 'manga';
+
+    // 1) Create a new db
+    const dbRequest = indexedDB.deleteDatabase(dbName);
+
+    // Handling upgrade
+    dbRequest.onsuccess = function (event) {
+      console.log('DB deleted successfully');
+    };
+
+    dbRequest.onerror = function (event) {
+      console.log('Error deleting database');
+    };
+  };
 
   return (
     <div>
@@ -54,7 +73,9 @@ function deleteCollectionHandler() {
 
       <br />
 
-      <button onClick={deleteCollectionHandler}>Delete Collection</button>
+      <button id="btn-delete" onClick={deleteCollectionHandler}>Delete Collection</button>
+      {' '}
+      <button id="btn-delete" onClick={deleteDatabaseHandler}>Delete Database</button>
     </div>
   );
 }

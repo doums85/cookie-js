@@ -36,3 +36,12 @@ form input {
 input[type='submit'] {
   background-color: #ffbd59;
 }
+
+
+#btn-delete {
+  padding: 0.4rem 0.7rem;
+  border: none;
+  background-color: crimson;
+  color: white;
+  margin: 0.4rem;
+}
