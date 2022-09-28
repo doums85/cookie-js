@@ -1,4 +1,4 @@
-import { Add, FetchData } from './components';
+import { Add, FetchData, Update } from './components';
 import './App.css';
 import { useEffect, useState } from 'react';
 
@@ -48,9 +48,14 @@ function App() {
       <Add {...{ onChangeHandler, dbRequest }} />
 
       <hr />
-      
+
       {/* Fetch Data */}
       <FetchData {...{ onChangeHandler, dbRequest }} />
+
+      <hr />
+
+      {/* Update Data */}
+      <Update {...{ onChangeHandler, dbRequest }} />
     </div>
   );
 }
