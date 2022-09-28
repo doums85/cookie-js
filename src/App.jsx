@@ -1,4 +1,4 @@
-import { Add, FetchData, Update } from './components';
+import { Add, Delete, FetchData, Update } from './components';
 import './App.css';
 import { useEffect, useState } from 'react';
 
@@ -56,6 +56,11 @@ function App() {
 
       {/* Update Data */}
       <Update {...{ onChangeHandler, dbRequest }} />
+
+      <hr />
+
+      {/* Delete */}
+      <Delete {...{ onChangeHandler, dbRequest }} />
     </div>
   );
 }
