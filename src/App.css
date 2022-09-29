@@ -38,10 +38,14 @@ input[type='submit'] {
 }
 
 
-#btn-delete {
+.btn-delete {
   padding: 0.4rem 0.7rem;
   border: none;
   background-color: crimson;
   color: white;
   margin: 0.4rem;
+}
+
+img{
+  width: 180px;
 }

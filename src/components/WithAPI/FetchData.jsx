@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useStore } from '../hooks';
+import  { useState } from 'react';
 
 export default function FetchData({ onChangeHandler, dbRequest }) {
   const [textEntered, setTextEntered] = useState('');
@@ -9,8 +8,8 @@ export default function FetchData({ onChangeHandler, dbRequest }) {
     e.preventDefault();
 
     // 2) Get the collection's data
-    const transaction = dbRequest.transaction('shonen');
-    const store = transaction.objectStore('shonen');
+    const transaction = dbRequest.transaction('josei');
+    const store = transaction.objectStore('josei');
 
     const request = store.get(textEntered);
 
@@ -44,7 +43,7 @@ export default function FetchData({ onChangeHandler, dbRequest }) {
 
   return (
     <div>
-      <h1>Get Data</h1>
+      <h1>Get Data With API</h1>
 
       <form>
         <input
@@ -59,6 +58,7 @@ export default function FetchData({ onChangeHandler, dbRequest }) {
       <button onClick={(e) => getAllDataHandler(e)}>Get All Data</button>
 
       <div style={{ marginTop: '1rem' }}>
+        
         <h3>{manga?.name} </h3>
         <p>{manga?.author} </p>
         <br />

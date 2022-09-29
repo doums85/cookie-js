@@ -22,11 +22,11 @@ export default function Delete({ onChangeHandler, dbRequest }) {
     }
   }
 
-  function deleteCollectionHandler() {
+  function deleteAllDataHandler() {
     // 1) Create a new transaction
-    const transaction = dbRequest.transaction('shonen', 'readwrite');
+    const transaction = dbRequest.transaction('josei', 'readwrite');
     // 2) handling Object store
-    const store = transaction.objectStore('shonen');
+    const store = transaction.objectStore('josei');
 
     // 3) delete All objects
     const request = store.clear();
@@ -40,7 +40,23 @@ export default function Delete({ onChangeHandler, dbRequest }) {
     };
   }
 
-  const deleteDatabaseHandler = function () {
+  // Delete COLLECTION | store
+  function deleteCollectionHandler() {
+    console.log('Click');
+    const dbName = 'manga';
+    const dbVersion = 6;
+
+    const dbRequest = indexedDB.open(dbName, dbVersion);
+
+    dbRequest.onsuccess = function (event) {
+      console.log('====================================');
+      console.log('Successfully');
+      console.log('====================================');
+    }
+  }
+
+  // Delete DATABASE
+  function deleteDatabaseHandler() {
     const dbName = 'manga';
 
     // 1) Create a new db
@@ -54,7 +70,7 @@ export default function Delete({ onChangeHandler, dbRequest }) {
     dbRequest.onerror = function (event) {
       console.log('Error deleting database');
     };
-  };
+  }
 
   return (
     <div>
@@ -70,12 +86,16 @@ export default function Delete({ onChangeHandler, dbRequest }) {
           value="Delete Item"
         />
       </form>
-
       <br />
-
-      <button id="btn-delete" onClick={deleteCollectionHandler}>Delete Collection</button>
-      {' '}
-      <button id="btn-delete" onClick={deleteDatabaseHandler}>Delete Database</button>
+      <button className="btn-delete" onClick={deleteAllDataHandler}>
+        Delete All Data
+      </button>{' '}
+      <button className="btn-delete" onClick={deleteCollectionHandler}>
+        Delete A Collection
+      </button>
+      <button className="btn-delete" onClick={deleteDatabaseHandler}>
+        Delete Database
+      </button>
     </div>
   );
 }

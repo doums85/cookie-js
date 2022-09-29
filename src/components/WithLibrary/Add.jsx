@@ -1,43 +1,38 @@
 import { useState } from 'react';
 
-export default function Add( { dbRequest, onChangeHandler }) {
+export default function Add({ onChangeHandler, db }) {
   const [mangaName, setMangaName] = useState('');
   const [mangaDescription, setMangaDescription] = useState('');
   const [mangaAuthor, setMangaAuthor] = useState('');
+  const [url, setUrl] = useState(null);
 
-
-  // Add manga to database
-  function addMangaHandler(e) {
+  async function addMangaHandler(e) {
     e.preventDefault();
 
-    if (!dbRequest) {
-      return alert('There was an error try later...');
-    }
-    // Options: readonly(default) || readwrite || versionchange
-    const transaction = dbRequest.transaction('shonen', 'readwrite');
-    const store = transaction.objectStore('shonen');
-
-    const request = store.add({
+    await db.collection('shonen').add({
       name: mangaName,
+      image: url,
       author: mangaAuthor,
       description: mangaDescription,
     });
 
-    request.onsuccess = function () {
-      alert(`Your manga has been added : ${mangaName}`);
-    };
+    alert(`${mangaName} added successfully`);
+  }
 
-    request.onerror = function () {
-      alert('Something went wrong');
-    };
+  function onChangeInput(e) {
+    console.log(e.target.files[0]);
+
+    setUrl(e.target.files[0]);
   }
 
   return (
     <div>
-      <h1>Create Manga</h1>
+      <h1>Create Manga With Library</h1>
 
       <form>
         <div>
+          <input onChange={(e) => onChangeInput(e)} type="file" />
+          <img src={url} alt="" />
           <input
             onChange={(e) => onChangeHandler(e)(setMangaName)}
             type="text"
